@@ -1,42 +1,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class MathLogic
+namespace CustomMath
 {
-    public enum MathmaticalValue
+    [System.Serializable]
+    public class MathLogic
     {
-        Multi,
-        Div,
-        Add,
-        Sub,
-        Random
-    }
-
-    public static string GetMathmaticalSymbol(MathmaticalValue mathmaticalValue)
-    {
-        string symbol = string.Empty;
-
-        switch (mathmaticalValue)
+        public enum MathmaticalValue
         {
-            case MathmaticalValue.Multi:
-                symbol = "*";
-                break;
-            case MathmaticalValue.Div:
-                symbol = "/";
-                break;
-            case MathmaticalValue.Add:
-                symbol = "+";
-                break;
-            case MathmaticalValue.Sub:
-                symbol = "-";
-                break;
-            case MathmaticalValue.Random:
-                int rand = Random.Range(0, 4);
-                symbol = GetMathmaticalSymbol((MathmaticalValue)rand);
-                break;
+            Multi,
+            Div,
+            Add,
+            Sub,
+            Random
         }
 
-        return symbol;
+        public static string GetMathmaticalSymbol(MathmaticalValue mathmaticalValue)
+        {
+            string symbol = string.Empty;
+
+            switch (mathmaticalValue)
+            {
+                case MathmaticalValue.Multi:
+                    symbol = "x";
+                    break;
+                case MathmaticalValue.Div:
+                    symbol = "/";
+                    break;
+                case MathmaticalValue.Add:
+                    symbol = "+";
+                    break;
+                case MathmaticalValue.Sub:
+                    symbol = "-";
+                    break;
+                case MathmaticalValue.Random:
+                    int rand = Random.Range(0, 4);
+                    symbol = GetMathmaticalSymbol((MathmaticalValue)rand);
+                    break;
+            }
+
+            return symbol;
+        }
     }
 }

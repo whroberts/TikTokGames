@@ -9,13 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755705780317385064}
-  - component: {fileID: 8797536966375305205}
-  - component: {fileID: 8956299289397093776}
-  - component: {fileID: 7356054616163355542}
-  - component: {fileID: 368301067300289926}
-  - component: {fileID: 1994212216663539159}
-  m_Layer: 6
-  m_Name: Player
+  - component: {fileID: 7177688130829963609}
+  - component: {fileID: 6164243190646633418}
+  m_Layer: 8
+  m_Name: PlayerDuplicate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,8 +35,8 @@ Transform:
   - {fileID: 7274226591519770301}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &8797536966375305205
-CharacterController:
+--- !u!136 &7177688130829963609
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -51,20 +48,17 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
+  serializedVersion: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8956299289397093776
+--- !u!114 &6164243190646633418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,133 +67,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 293012718852536885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: a536fcbace3ccd24198385433ad5e7ee,
-    type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2541e361-f168-4321-837e-f97ed6c21530
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 36624159-1de2-4301-8927-af1bbb5c83f5
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 314a9ed2-97aa-454b-a05e-485772f7f5f2
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 86589e09-b447-4480-9dbb-df80fe388590
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8ef7c476-c088-4254-be8f-4eb94124ac8d
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5042df87-79d2-4311-8512-344787e03409
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1817c77a-7aaf-4640-b264-7ed89d13809d
-    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bd12f0ce-c187-4fd9-8a29-357d661e997f
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 439e1aff-6a4d-43b6-bdbf-a4439fe37496
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 38ad284d-1baf-4f54-b741-08028499202d
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: db6f4901-4591-43d7-9e39-35f28b8d2bb1
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 09aee556-2b63-4ce0-a488-f70f36676880
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 17f85675-5f58-46c1-8569-3dd58c7d8d8e
-    m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &7356054616163355542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293012718852536885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f97101921f4de34b8332a8355ef9a47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerVelocity: {x: 0, y: 0, z: 0}
-  groundedPlayer: 0
-  movementSpeed: 5
-  rotationSpeed: 100
-  jumpHeight: 1
-  gravityValue: -9.81
---- !u!114 &368301067300289926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293012718852536885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad4354b6c9ee934cb2d0d0961db6f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1994212216663539159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293012718852536885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e4f9d0f9759324faab06b01cfb222a, type: 3}
+  m_Script: {fileID: 11500000, guid: e8e715d89c7f0dc4f81f65df266a8f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 2422131096524547059, guid: 8a9ba065ba6bfc8419f58089dfbe8328,
     type: 3}
   shootPosition: {fileID: 7274226591519770301}
   fireRate: 0.25
-  automaticFire: 0
-  duplicatePrefab: {fileID: 293012718852536885, guid: af6fbb611ca62d54da41a679df6bcb45,
-    type: 3}
-  duplicateGameObjects: []
-  currentDuplicates: 0
-  minDuplicates: 0
-  maxDuplicates: 250
+  automaticFire: 1
 --- !u!1 &2408895151640482111
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +86,7 @@ GameObject:
   - component: {fileID: 3800151960730044591}
   - component: {fileID: 3352102162130000686}
   - component: {fileID: 5957696488578126702}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7274226591519770301}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ShootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1872737593289629030}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}

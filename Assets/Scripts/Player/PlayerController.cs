@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 using Player.Movement;
 using Projectiles;
-using Unity.VisualScripting;
 
-namespace Player.Controller
+namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IDamageable
     {
         [Header("Values")]
         [SerializeField] private Vector3 playerVelocity;
@@ -18,14 +18,14 @@ namespace Player.Controller
         [SerializeField] private float jumpHeight = 1.0f;
         [SerializeField] private float gravityValue = -9.81f;
 
-        [Header("Projectile")]
-        [SerializeField] private GameObject projectile = null;
-        [SerializeField] private Transform shootPosition = null;
-        [SerializeField] private float fireRate = 1f;
-        [SerializeField] private bool canFire = true;
-
         private InputManager inputManager = null;
+        public InputManager InputManager => inputManager;
         private CharacterController characterController = null;
+
+        private float health = 100f;
+
+        public delegate void PlayerMovedEventHandler();
+        public event PlayerMovedEventHandler OnPlayerMoved;
 
         private void Awake()
         {
@@ -33,7 +33,7 @@ namespace Player.Controller
             characterController = GetComponent<CharacterController>();
         }
 
-        void Update()
+        private void Update()
         {
             if (inputManager.DirectionVector.normalized.magnitude >= 0.1)
             {
@@ -41,8 +41,6 @@ namespace Player.Controller
             }
 
             Rotate();
-
-            ShootProjectile();
         }
 
         private void Move()
@@ -55,6 +53,9 @@ namespace Player.Controller
             {
                 //gameObject.transform.forward = move;
             }
+
+            if (OnPlayerMoved != null)
+                OnPlayerMoved();
         }
 
         private void Rotate()
@@ -65,27 +66,19 @@ namespace Player.Controller
             transform.rotation *= Quaternion.Euler(rotation);
         }
 
-        private void ShootProjectile()
+        public void TakeDamage(float damage)
         {
-            if (inputManager.Shoot > 0 && canFire)
-            {
-                if (projectile != null)
-                {
-                    var instProjectile = Instantiate(projectile, transform.parent, true);
-                    instProjectile.transform.localPosition = shootPosition.transform.position;
-                    instProjectile.transform.rotation = shootPosition.transform.rotation;
+            health -= damage;
 
-                    instProjectile.GetComponent<PlayerProjectile>().CallShoot(transform.forward);
-                    StartCoroutine(FireRateDelay());
-                }
+            if (health <= 0)
+            {
+                Destroy(gameObject);
             }
         }
 
-        private IEnumerator FireRateDelay()
+        public void DealDamage(float damage)
         {
-            canFire = false;
-            yield return new WaitForSeconds(fireRate);
-            canFire = true;
+
         }
 
         /*

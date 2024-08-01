@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using CustomMath;
-using Player.Controller;
+using Player;
 using UnityEngine;
 
 namespace Game.WorldObjects
@@ -11,32 +11,58 @@ namespace Game.WorldObjects
     public class Gate : MonoBehaviour
     {
         [SerializeField] private Color color = Color.red;
-        [SerializeField] private int value = 1;
-
-        [SerializeField] private MathLogic.MathmaticalValue mathmaticalValue = MathLogic.MathmaticalValue.Random;
-        [SerializeField] private string mathmaticalSymbol = string.Empty;
+        [SerializeField] private MathLogic.MathmaticalSymbol mathmaticalSymbol = MathLogic.MathmaticalSymbol.Random;
+        [SerializeField] private string mathSymbol = string.Empty;
+        [SerializeField] private int mathValue = 1;
 
         [SerializeField] private GameObject gate = null;
         [SerializeField] private TMP_Text text = null;
 
         private void Start()
         {
-            mathmaticalSymbol = MathLogic.GetMathmaticalSymbol(mathmaticalValue);
-            text.text = mathmaticalSymbol + value;
+            var gateLogic = MathLogic.GetMathmaticalSymbol(mathmaticalSymbol);
+            mathmaticalSymbol = gateLogic.Item1;
+            mathSymbol = gateLogic.Item2;
+            mathValue = gateLogic.Item3;
+
+            text.text = mathSymbol + mathValue;
             gate.GetComponent<MeshRenderer>().material.color = color;
         }
 
         private void OnTriggerEnter(Collider collider)
         {
-            PlayerController player = collider.GetComponent<PlayerController>();
+            PlayerGameplay player = collider.GetComponent<PlayerGameplay>();
 
             if (player != null)
             {
                 Debug.Log("Player Entered");
 
+                int newDuplicatesCount = SendDuplicates(player.GetCurrentDuplicates());
+                Debug.Log("Sending " + newDuplicatesCount +" Duplicates");
+                player.ChangeDuplicateCount(newDuplicatesCount);
+
                 GetComponent<BoxCollider>().enabled = false;
+                
+                Destroy(gameObject, 2f);
             }
         }
 
+        private int SendDuplicates(int currentDuplicates)
+        {
+            switch (mathmaticalSymbol)
+            {
+                case MathLogic.MathmaticalSymbol.Multi:
+                    return currentDuplicates * mathValue;
+                case MathLogic.MathmaticalSymbol.Div:
+                    return currentDuplicates / mathValue;
+                case MathLogic.MathmaticalSymbol.Add:
+                    return currentDuplicates + mathValue;
+                case MathLogic.MathmaticalSymbol.Sub:
+                    return currentDuplicates - mathValue;
+            }
+
+            Debug.LogError("Returning previous duplicateCount");
+            return currentDuplicates;
+        }
     }
 }

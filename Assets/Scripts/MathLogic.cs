@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace CustomMath
@@ -6,7 +6,7 @@ namespace CustomMath
     [System.Serializable]
     public class MathLogic
     {
-        public enum MathmaticalValue
+        public enum MathmaticalSymbol
         {
             Multi,
             Div,
@@ -15,31 +15,41 @@ namespace CustomMath
             Random
         }
 
-        public static string GetMathmaticalSymbol(MathmaticalValue mathmaticalValue)
+        public static Tuple<MathmaticalSymbol, string, int> GetMathmaticalSymbol(MathmaticalSymbol mathmaticalSymbol)
         {
             string symbol = string.Empty;
+            int value = 1;
 
-            switch (mathmaticalValue)
+            if (mathmaticalSymbol == MathmaticalSymbol.Random)
             {
-                case MathmaticalValue.Multi:
+                mathmaticalSymbol = (MathmaticalSymbol)UnityEngine.Random.Range(0, 4);
+            }
+
+
+            switch (mathmaticalSymbol)
+            {
+                case MathmaticalSymbol.Multi:
                     symbol = "x";
+                    value = UnityEngine.Random.Range(1, 5);
                     break;
-                case MathmaticalValue.Div:
+                case MathmaticalSymbol.Div:
                     symbol = "/";
+                    value = UnityEngine.Random.Range(1, 5);
                     break;
-                case MathmaticalValue.Add:
+                case MathmaticalSymbol.Add:
                     symbol = "+";
+                    value = UnityEngine.Random.Range(10, 20);
                     break;
-                case MathmaticalValue.Sub:
+                case MathmaticalSymbol.Sub:
                     symbol = "-";
+                    value = UnityEngine.Random.Range(10, 20);
                     break;
-                case MathmaticalValue.Random:
-                    int rand = Random.Range(0, 4);
-                    symbol = GetMathmaticalSymbol((MathmaticalValue)rand);
+                case MathmaticalSymbol.Random:
+                    Debug.LogError("Mathmatical Symbol cannot be random");
                     break;
             }
 
-            return symbol;
+            return Tuple.Create(mathmaticalSymbol, symbol, value);
         }
     }
 }

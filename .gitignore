@@ -9,7 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+
+#PersonalExclusions
 /[Pp]hotoShopAssets/
+/[Ss]creenCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta

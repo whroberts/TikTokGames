@@ -18,21 +18,27 @@ namespace Camera
 
         private void OnEnable()
         {
-            player.GetComponent<PlayerController>().OnPlayerMoved += MoveCamera;
+            if (player != null)
+                player.GetComponent<PlayerController>().OnPlayerMoved += MoveCamera;
         }
 
         private void OnDisable()
         {
-            player.GetComponent<PlayerController>().OnPlayerMoved -= MoveCamera;
+            if (player != null)
+                player.GetComponent<PlayerController>().OnPlayerMoved -= MoveCamera;
         }
 
         private void MoveCamera()
         {
-            Vector3 newPos = new Vector3(
-                startingTrans.position.x,
-                startingTrans.position.y,
-                player.transform.position.z + startingTrans.position.z);
-            transform.position = newPos;
+            if (player != null)
+            {
+                Vector3 newPos = new Vector3(
+                    startingTrans.position.x,
+                    startingTrans.position.y,
+                    player.transform.position.z + startingTrans.position.z);
+                transform.position = newPos;
+            }
+
         }
     }
 

@@ -13,7 +13,7 @@ namespace Game.WorldObjects
         [SerializeField] private Color color = Color.red;
         [SerializeField] private MathLogic.MathmaticalSymbol mathmaticalSymbol = MathLogic.MathmaticalSymbol.Random;
         [SerializeField] private string mathSymbol = string.Empty;
-        [SerializeField] private int mathValue = 1;
+        [SerializeField] private int mathValue = -1;
 
         [SerializeField] private GameObject gate = null;
         [SerializeField] private TMP_Text text = null;
@@ -23,7 +23,9 @@ namespace Game.WorldObjects
             var gateLogic = MathLogic.GetMathmaticalSymbol(mathmaticalSymbol);
             mathmaticalSymbol = gateLogic.Item1;
             mathSymbol = gateLogic.Item2;
-            mathValue = gateLogic.Item3;
+
+            if (mathValue < 0)
+                mathValue = gateLogic.Item3;
 
             text.text = mathSymbol + mathValue;
             gate.GetComponent<MeshRenderer>().material.color = color;
@@ -56,7 +58,7 @@ namespace Game.WorldObjects
                 case MathLogic.MathmaticalSymbol.Div:
                     return currentDuplicates / mathValue;
                 case MathLogic.MathmaticalSymbol.Add:
-                    return currentDuplicates + mathValue;
+                    return currentDuplicates -1 + mathValue;
                 case MathLogic.MathmaticalSymbol.Sub:
                     return currentDuplicates - mathValue;
             }
